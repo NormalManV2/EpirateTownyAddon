@@ -2,3 +2,5 @@ name: EpirateTownyAddon
 version: '${project.version}'
 main: nuclearkat.epiratetownyaddon.EpirateTownyAddon
 api-version: 1.20
+depend:
+  - Towny
