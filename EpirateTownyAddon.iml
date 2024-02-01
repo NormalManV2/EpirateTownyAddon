@@ -31,10 +31,10 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.joml:joml:1.10.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.md-5:bungeecord-chat:1.20-R0.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.yaml:snakeyaml:2.2" level="project" />
-    <orderEntry type="library" name="Maven: com.github.TownyAdvanced:Towny:0.100.1.0" level="project" />
-    <orderEntry type="library" name="Maven: com.github.TownyAdvanced.Towny:towny:0.100.1.0" level="project" />
-    <orderEntry type="library" name="Maven: com.github.TownyAdvanced.Towny:towny-base-providers:0.100.1.0" level="project" />
-    <orderEntry type="library" name="Maven: com.github.TownyAdvanced.Towny:towny-folia-provider:0.100.1.0" level="project" />
-    <orderEntry type="library" name="Maven: com.github.TownyAdvanced.Towny:towny-paper-provider:0.100.1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.TownyAdvanced:Towny:0.99.5.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.TownyAdvanced.Towny:towny:0.99.5.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.TownyAdvanced.Towny:towny-base-providers:0.99.5.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.TownyAdvanced.Towny:towny-folia-provider:0.99.5.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.TownyAdvanced.Towny:towny-paper-provider:0.99.5.0" level="project" />
   </component>
 </module>
