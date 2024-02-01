@@ -7,6 +7,7 @@ import nuclearkat.epiratetownyaddon.events.TownPreInviteEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,6 +35,29 @@ public final class EpirateTownyAddon extends JavaPlugin implements Listener {
         loadConfig();
         loadCooldowns();
     }
+
+
+    public boolean isCooldownExpired(Player player) {
+        if (cooldowns.containsKey(player.getUniqueId())) {
+            long cooldownEnd = cooldowns.get(player.getUniqueId()) + cooldownDurationMillis;
+            return System.currentTimeMillis() > cooldownEnd;
+        }
+        return true;
+    }
+
+    public void setCooldown(Player player) {
+        cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+    }
+
+    public long getRemainingCooldownHours(Player player) {
+        if (cooldowns.containsKey(player.getUniqueId())) {
+            long cooldownEnd = cooldowns.get(player.getUniqueId()) + cooldownDurationMillis;
+            long remainingMillis = cooldownEnd - System.currentTimeMillis();
+            return TimeUnit.MILLISECONDS.toHours(remainingMillis);
+        }
+        return 0;
+    }
+
     private void loadCooldowns() {
         CooldownFileUtil.loadCooldownsFromFile(cooldowns, getDataFolder());
     }

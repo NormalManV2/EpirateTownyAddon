@@ -22,8 +22,8 @@ public class TownLeaveEvent implements Listener {
     }
 
     public void handleTownAction(Player player, CancellableTownyEvent e) {
-        if (player != null && !isCooldownExpired(player)) {
-            long remainingCooldownHours = getRemainingCooldownHours(player);
+        if (player != null && !epirateTownyAddon.isCooldownExpired(player)) {
+            long remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(player);
             String remainingTimeMsg = ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.remainingTimeMessage.replace("%hours%", String.valueOf(remainingCooldownHours)));
 
             player.sendMessage(ChatColor.RED + epirateTownyAddon.onCooldownMessage);
@@ -31,31 +31,9 @@ public class TownLeaveEvent implements Listener {
 
             e.setCancelled(true);
 
-        } else if (player != null && isCooldownExpired(player)) {
+        } else if (player != null && epirateTownyAddon.isCooldownExpired(player)) {
             e.setCancelled(false);
-            setCooldown(player);
+            epirateTownyAddon.setCooldown(player);
         }
     }
-
-    boolean isCooldownExpired(Player player) {
-        if (epirateTownyAddon.cooldowns.containsKey(player.getUniqueId())) {
-            long cooldownEnd = epirateTownyAddon.cooldowns.get(player.getUniqueId()) + epirateTownyAddon.cooldownDurationMillis;
-            return System.currentTimeMillis() > cooldownEnd;
-        }
-        return true;
-    }
-
-    void setCooldown(Player player) {
-        epirateTownyAddon.cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
-    }
-
-    long getRemainingCooldownHours(Player player) {
-        if (epirateTownyAddon.cooldowns.containsKey(player.getUniqueId())) {
-            long cooldownEnd = epirateTownyAddon.cooldowns.get(player.getUniqueId()) + epirateTownyAddon.cooldownDurationMillis;
-            long remainingMillis = cooldownEnd - System.currentTimeMillis();
-            return TimeUnit.MILLISECONDS.toHours(remainingMillis);
-        }
-        return 0;
-    }
-
 }
