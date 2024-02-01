@@ -1,0 +1,6 @@
+cooldowns:
+  duration: 86400  # 24 hours in seconds
+  messages:
+    onCooldown: "&cYou are on cooldown. Cannot join or leave another town."
+    remainingTime: "&eRemaining cooldown: %hours% hours."
+    inviteCooldown: "&fCannot invite &c&l%player%&f as they are on cooldown. Remaining cooldown: &c&l%hours% &fhours."
