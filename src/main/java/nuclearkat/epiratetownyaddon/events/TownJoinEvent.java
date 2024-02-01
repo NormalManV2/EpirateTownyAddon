@@ -14,13 +14,13 @@ public class TownJoinEvent implements Listener {
 
     private final EpirateTownyAddon epirateTownyAddon;
 
-    public TownJoinEvent(EpirateTownyAddon epirateTownyAddon){
+    public TownJoinEvent(EpirateTownyAddon epirateTownyAddon) {
         this.epirateTownyAddon = epirateTownyAddon;
     }
 
     @EventHandler
-    public void onTownJoin(TownPreAddResidentEvent e) {
-        Player player = e.getResident().getPlayer();
+    public void onTownJoin(TownPreAddResidentEvent event) {
+        Player player = event.getResident().getPlayer();
         System.out.println("Town Pre Add Resident Event Fired Successfully!");
 
         if (player != null && !epirateTownyAddon.isCooldownExpired(player)) {
@@ -29,14 +29,17 @@ public class TownJoinEvent implements Listener {
 
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.onCooldownMessage));
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', remainingTimeMsg));
-            e.getResident().removeTown();
 
+            try {
+                event.getResident().removeTown();
+            } catch (Exception ex) {
+                Bukkit.getLogger().log(Level.SEVERE, "An error occurred while removing town for player: " + player.getName(), ex);
+            }
 
-        } else if (player != null && epirateTownyAddon.isCooldownExpired(player)){
+        } else if (player != null && epirateTownyAddon.isCooldownExpired(player)) {
             epirateTownyAddon.setCooldown(player);
         } else {
-            Bukkit.getLogger().log(Level.WARNING, "TownJoinEvent Failed : either ln 25 / ln 32");
+            Bukkit.getLogger().log(Level.FINE, "TownJoinEvent Failed: either ln 25 / ln 32");
         }
     }
-
 }

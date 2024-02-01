@@ -25,24 +25,28 @@ public final class EpirateTownyAddon extends JavaPlugin implements Listener {
     public String remainingTimeMessage;
     public String inviteCooldownMessage;
 
+    private static final long DEFAULT_COOLDOWN_DURATION = TimeUnit.HOURS.toMillis(24);
+
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(new TownJoinEvent(this), this);
-        getServer().getPluginManager().registerEvents(new TownPreInviteEvent(this), this);
-        getServer().getPluginManager().registerEvents(new TownLeaveEvent(this), this);
-
-        Bukkit.getLogger().log(Level.INFO, "Epirate Towny addon created by NormalMan_V2 { Contact on discord for support : normalmanv2 } ");
+        registerEvents();
+        logAddonInfo();
         loadConfig();
         loadCooldowns();
     }
 
+    private void registerEvents() {
+        getServer().getPluginManager().registerEvents(new TownJoinEvent(this), this);
+        getServer().getPluginManager().registerEvents(new TownPreInviteEvent(this), this);
+        getServer().getPluginManager().registerEvents(new TownLeaveEvent(this), this);
+    }
+
+    private void logAddonInfo() {
+        Bukkit.getLogger().log(Level.CONFIG, "Epirate Towny addon created by NormalMan_V2 { Contact on discord for support : normalmanv2 } ");
+    }
 
     public boolean isCooldownExpired(Player player) {
-        if (cooldowns.containsKey(player.getUniqueId())) {
-            long cooldownEnd = cooldowns.get(player.getUniqueId()) + cooldownDurationMillis;
-            return System.currentTimeMillis() > cooldownEnd;
-        }
-        return true;
+        return cooldowns.containsKey(player.getUniqueId()) && System.currentTimeMillis() > cooldowns.get(player.getUniqueId()) + cooldownDurationMillis;
     }
 
     public void setCooldown(Player player) {
@@ -52,8 +56,7 @@ public final class EpirateTownyAddon extends JavaPlugin implements Listener {
     public long getRemainingCooldownHours(Player player) {
         if (cooldowns.containsKey(player.getUniqueId())) {
             long cooldownEnd = cooldowns.get(player.getUniqueId()) + cooldownDurationMillis;
-            long remainingMillis = cooldownEnd - System.currentTimeMillis();
-            return TimeUnit.MILLISECONDS.toHours(remainingMillis);
+            return TimeUnit.MILLISECONDS.toHours(Math.max(0, cooldownEnd - System.currentTimeMillis()));
         }
         return 0;
     }
@@ -71,7 +74,7 @@ public final class EpirateTownyAddon extends JavaPlugin implements Listener {
         config.options().copyDefaults(true);
         saveConfig();
 
-        cooldownDurationMillis = config.getLong("cooldowns.duration", TimeUnit.HOURS.toMillis(24));
+        cooldownDurationMillis = config.getLong("cooldowns.duration", DEFAULT_COOLDOWN_DURATION);
         onCooldownMessage = ChatColor.translateAlternateColorCodes('&', config.getString("cooldowns.messages.onCooldown", "&cYou are on cooldown. Cannot join or leave another town."));
         remainingTimeMessage = ChatColor.translateAlternateColorCodes('&', config.getString("cooldowns.messages.remainingTime", "&eRemaining cooldown: %hours% hours."));
         inviteCooldownMessage = ChatColor.translateAlternateColorCodes('&', config.getString("cooldowns.messages.inviteCooldown", "&fCannot invite &c&l%player%&f as they are on cooldown. Remaining cooldown: &c&l%hours% &fhours."));
