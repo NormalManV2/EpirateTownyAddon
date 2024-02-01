@@ -1,6 +1,5 @@
 package nuclearkat.epiratetownyaddon.events;
 
-import com.palmergames.bukkit.towny.event.TownAddResidentEvent;
 import com.palmergames.bukkit.towny.event.TownPreAddResidentEvent;
 import nuclearkat.epiratetownyaddon.EpirateTownyAddon;
 import org.bukkit.Bukkit;
@@ -20,8 +19,10 @@ public class TownJoinEvent implements Listener {
     }
 
     @EventHandler
-    public void onTownJoin(TownAddResidentEvent e) {
+    public void onTownJoin(TownPreAddResidentEvent e) {
         Player player = e.getResident().getPlayer();
+        System.out.println("Town Pre Add Resident Event Fired Successfully!");
+
         if (player != null && !epirateTownyAddon.isCooldownExpired(player)) {
             long remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(player);
             String remainingTimeMsg = ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.remainingTimeMessage.replace("%hours%", String.valueOf(remainingCooldownHours)));

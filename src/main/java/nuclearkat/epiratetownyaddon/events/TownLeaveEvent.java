@@ -1,13 +1,11 @@
 package nuclearkat.epiratetownyaddon.events;
 
 import com.palmergames.bukkit.towny.event.CancellableTownyEvent;
-import com.palmergames.bukkit.towny.event.PlayerLeaveTownEvent;
 import nuclearkat.epiratetownyaddon.EpirateTownyAddon;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import java.util.concurrent.TimeUnit;
 
 public class TownLeaveEvent implements Listener {
 
@@ -19,6 +17,8 @@ public class TownLeaveEvent implements Listener {
     @EventHandler
     public void onTownLeave(com.palmergames.bukkit.towny.event.town.TownLeaveEvent e) {
         Player player = (Player) e.getResident();
+        System.out.println("Town Leave Event Fired Successfully!");
+
         handleTownAction(player, e);
     }
 

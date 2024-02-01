@@ -1,8 +1,6 @@
 package nuclearkat.epiratetownyaddon.events;
 
-import com.palmergames.bukkit.towny.event.TownInvitePlayerEvent;
 import com.palmergames.bukkit.towny.event.town.TownPreInvitePlayerEvent;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import nuclearkat.epiratetownyaddon.EpirateTownyAddon;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -20,9 +18,11 @@ public class TownPreInviteEvent implements Listener {
         this.epirateTownyAddon = epirateTownyAddon;
     }
     @EventHandler
-    public void onInviteSent(TownInvitePlayerEvent e) {
-        Player invitedPlayer = e.getInvite().getReceiver().getPlayer();
+    public void onInviteSent(TownPreInvitePlayerEvent e) {
+        Player invitedPlayer = e.getInvitedResident().getPlayer();
         Player inviter = (Player) e.getInvite().getDirectSender();
+
+        System.out.println("Town Pre Invite Player Event Fired Successfully!");
 
         if (invitedPlayer != null && !epirateTownyAddon.isCooldownExpired(invitedPlayer)) {
             long remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(invitedPlayer);
