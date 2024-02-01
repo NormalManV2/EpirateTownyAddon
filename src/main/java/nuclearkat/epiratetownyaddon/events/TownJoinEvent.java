@@ -39,7 +39,7 @@ public class TownJoinEvent implements Listener {
         } else if (player != null && epirateTownyAddon.isCooldownExpired(player)) {
             epirateTownyAddon.setCooldown(player);
         } else {
-            Bukkit.getLogger().log(Level.FINE, "TownJoinEvent Failed: either ln 25 / ln 32");
+            Bukkit.getLogger().log(Level.FINE, "TownJoinEvent Failed: either ln 26 / ln 39");
         }
     }
 }

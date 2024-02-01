@@ -48,7 +48,7 @@ public class TownLeaveEvent implements Listener {
                 Bukkit.getLogger().log(Level.SEVERE, "An error occurred while allowing town leave event for player: " + player.getName(), ex);
             }
         } else {
-            Bukkit.getLogger().log(Level.FINE, "TownLeaveEvent Failed: either ln 28 / ln 36");
+            Bukkit.getLogger().log(Level.FINE, "TownLeaveEvent Failed: either ln 30 / ln 43");
         }
     }
 }

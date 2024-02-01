@@ -48,7 +48,7 @@ public class TownPreInviteEvent implements Listener {
                 Bukkit.getLogger().log(Level.SEVERE, "An error occurred while declining invite for invited player: " + invitedPlayer.getName(), ex);
             }
         } else {
-            Bukkit.getLogger().log(Level.FINE, "TownPreInviteEvent Failed: either ln 26 / ln 36");
+            Bukkit.getLogger().log(Level.FINE, "TownPreInviteEvent Failed: either ln 28 / ln 44");
         }
     }
 }
