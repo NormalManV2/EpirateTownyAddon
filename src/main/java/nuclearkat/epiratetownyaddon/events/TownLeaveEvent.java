@@ -1,6 +1,7 @@
 package nuclearkat.epiratetownyaddon.events;
 
 import com.palmergames.bukkit.towny.event.CancellableTownyEvent;
+import com.palmergames.bukkit.towny.event.PlayerLeaveTownEvent;
 import nuclearkat.epiratetownyaddon.EpirateTownyAddon;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

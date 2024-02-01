@@ -19,8 +19,8 @@ import java.util.logging.Level;
 
 public final class EpirateTownyAddon extends JavaPlugin implements Listener {
 
-    public Map<UUID, Long> cooldowns = new HashMap<>();
-    public long cooldownDurationMillis;
+    private final Map<UUID, Long> cooldowns = new HashMap<>();
+    private long cooldownDurationMillis;
     public String onCooldownMessage;
     public String remainingTimeMessage;
     public String inviteCooldownMessage;

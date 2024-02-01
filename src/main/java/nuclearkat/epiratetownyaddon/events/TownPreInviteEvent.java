@@ -1,6 +1,8 @@
 package nuclearkat.epiratetownyaddon.events;
 
+import com.palmergames.bukkit.towny.event.TownInvitePlayerEvent;
 import com.palmergames.bukkit.towny.event.town.TownPreInvitePlayerEvent;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import nuclearkat.epiratetownyaddon.EpirateTownyAddon;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,8 +20,8 @@ public class TownPreInviteEvent implements Listener {
         this.epirateTownyAddon = epirateTownyAddon;
     }
     @EventHandler
-    public void onInviteSent(TownPreInvitePlayerEvent e) {
-        Player invitedPlayer = e.getInvitedResident().getPlayer();
+    public void onInviteSent(TownInvitePlayerEvent e) {
+        Player invitedPlayer = e.getInvite().getReceiver().getPlayer();
         Player inviter = (Player) e.getInvite().getDirectSender();
 
         if (invitedPlayer != null && !epirateTownyAddon.isCooldownExpired(invitedPlayer)) {
@@ -29,13 +31,13 @@ public class TownPreInviteEvent implements Listener {
                     .replace("%hours%", String.valueOf(remainingCooldownHours)));
 
             if (inviter != null) {
-                e.setCancelMessage(cooldownMessage);
-                e.setCancelled(true);
+                inviter.sendMessage(ChatColor.translateAlternateColorCodes('&', cooldownMessage));
+                e.getInvite().decline(true);
             } else {
                 Bukkit.getLogger().log(Level.WARNING, "Inviter = null cannot process function!");
             }
         } else if (invitedPlayer != null && epirateTownyAddon.isCooldownExpired(invitedPlayer)){
-            e.setCancelled(false);
+            e.getInvite().decline(false);
         } else {
             Bukkit.getLogger().log(Level.WARNING, "TownPreInviteEvent Failed! : either ln 26 / ln 36");
         }
