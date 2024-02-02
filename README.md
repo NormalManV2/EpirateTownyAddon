@@ -20,6 +20,12 @@ As you can see in the snippets below, the events that are triggered by this plug
  * If the player is on cooldown when leaving a town, they will not be allowed to do so and sent the message(s). Either the default ones or the ones you configure.
  * If the player is not currently on cooldown, they will be allowed to leave the town and then put on cooldown.
 
+## Command / Usage
+* Admin usage:
+ * /cda [start] | [remove] {Player Name} (duration in the case of starting a cooldown for the player) -> /cda start {playername} (duration) will start a townhop cooldown for the player for (duration, please keep in mind this value is in seconds) -> /cda remove {playername} will remove a cooldown from the player if they currently have a townhop cooldown.
+* Player usage:
+ * /cooldown -> returns their current cooldown time if any.
+
 
 https://github.com/NukeCaps/EpirateTownyAddon/assets/106290271/409935f0-64a3-45f1-aedc-802c118240fc
 
