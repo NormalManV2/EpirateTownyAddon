@@ -1,5 +1,5 @@
 cooldowns:
-  duration: 86400  # 24 hours in seconds
+  duration: 24  # input is hours ie: 24 = 24 hour cooldown.
   messages:
     onCooldown: "&cYou are on cooldown. Cannot join or leave another town."
     remainingTime: "&eRemaining cooldown: %hours% hours."

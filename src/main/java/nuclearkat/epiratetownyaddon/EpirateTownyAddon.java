@@ -17,7 +17,7 @@ import java.util.logging.Level;
 public final class EpirateTownyAddon extends JavaPlugin implements Listener {
 
 
-    // Config variables.
+    //  Config variables.
     private int cooldownDurationHours;
     public String onCooldownMessage;
     public String remainingTimeMessage;
@@ -46,8 +46,8 @@ public final class EpirateTownyAddon extends JavaPlugin implements Listener {
         Bukkit.getLogger().log(Level.CONFIG, "Epirate Towny addon created by NormalMan_V2 { Contact on discord for support : normalmanv2 } ");
     }
 
-    //                      Helper methods to handle functions in our event classes :
 
+    // Helper methods to handle functions in our event classes :
 
     // If the cooldown timer task does not contain the player related in function, it will return true : player has no cooldown.
     public boolean isCooldownExpired(Player player) {
