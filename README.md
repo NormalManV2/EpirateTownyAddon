@@ -22,8 +22,10 @@ As you can see in the snippets below, the events that are triggered by this plug
 
 ## Command / Usage
 * Admin usage:
+ * Permission node : "towny.cooldowns.admin"
  * /cda [start] | [remove] {Player Name} (duration in the case of starting a cooldown for the player) -> /cda start {playername} (duration) will start a townhop cooldown for the player for (duration, please keep in mind this value is in seconds) -> /cda remove {playername} will remove a cooldown from the player if they currently have a townhop cooldown.
 * Player usage:
+ * Permission node : "towny.coodlowns.check"
  * /cooldown -> returns their current cooldown time if any.
 
 
