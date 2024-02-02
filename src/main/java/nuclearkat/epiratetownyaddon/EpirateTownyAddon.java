@@ -1,6 +1,8 @@
 package nuclearkat.epiratetownyaddon;
 
 import com.palmergames.bukkit.towny.tasks.CooldownTimerTask;
+import nuclearkat.epiratetownyaddon.commands.AdminCommand;
+import nuclearkat.epiratetownyaddon.commands.PlayerCommand;
 import nuclearkat.epiratetownyaddon.events.TownJoinEvent;
 import nuclearkat.epiratetownyaddon.events.TownLeaveEvent;
 import nuclearkat.epiratetownyaddon.events.TownPreInviteEvent;
@@ -28,8 +30,13 @@ public final class EpirateTownyAddon extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         registerEvents();
+        registerCommands();
         logAddonInfo();
         loadConfig();
+    }
+    private void registerCommands(){
+        getCommand("cda").setExecutor(new AdminCommand(this));
+        getCommand("cooldown").setExecutor(new PlayerCommand(this));
     }
     private void registerEvents() {
         getServer().getPluginManager().registerEvents(new TownJoinEvent(this), this);
