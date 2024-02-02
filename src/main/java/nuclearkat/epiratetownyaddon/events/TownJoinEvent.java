@@ -20,11 +20,14 @@ public class TownJoinEvent implements Listener {
     }
     @EventHandler
     public void onTownJoin(TownPreAddResidentEvent event) {
+
         Player player = event.getResident().getPlayer();
+
         if (player == null) {
             Bukkit.getLogger().log(Level.WARNING, "Could not process invite as either inviter / invited player is null!");
             return;
         }
+
         if (CooldownTimerTask.hasCooldown(player.getName(), "TownHop Cooldown")) {
 
             long remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(player);

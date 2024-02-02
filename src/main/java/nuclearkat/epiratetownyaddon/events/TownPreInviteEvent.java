@@ -28,6 +28,7 @@ public class TownPreInviteEvent implements Listener {
             Bukkit.getLogger().log(Level.WARNING, "Could not process invite as either inviter / invited player is null!");
             return;
         }
+
         if (CooldownTimerTask.hasCooldown(invitedPlayer.getName(), "TownHop Cooldown")) {
             long remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(invitedPlayer);
             String inviteMessage = ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.inviteCooldownMessage

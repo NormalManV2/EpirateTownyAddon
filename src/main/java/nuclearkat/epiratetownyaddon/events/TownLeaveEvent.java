@@ -3,13 +3,10 @@ package nuclearkat.epiratetownyaddon.events;
 import com.palmergames.bukkit.towny.event.CancellableTownyEvent;
 import com.palmergames.bukkit.towny.tasks.CooldownTimerTask;
 import nuclearkat.epiratetownyaddon.EpirateTownyAddon;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-
-import java.util.logging.Level;
 
 public class TownLeaveEvent implements Listener {
 
@@ -25,9 +22,11 @@ public class TownLeaveEvent implements Listener {
     }
 
     public void handleTownAction(Player player, CancellableTownyEvent event) {
+
         if (player == null) {
             return;
         }
+
         if (CooldownTimerTask.hasCooldown(player.getName(), "TownHop Cooldown")) {
             long remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(player);
             String remainingTimeMsg = ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.remainingTimeMessage.replace("%hours%", String.valueOf(remainingCooldownHours)));
