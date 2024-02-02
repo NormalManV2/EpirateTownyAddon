@@ -28,7 +28,7 @@ public class TownLeaveEvent implements Listener {
         }
 
         if (CooldownTimerTask.hasCooldown(player.getName(), "TownHop Cooldown")) {
-            long remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(player);
+            String remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(player);
             String remainingTimeMsg = ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.remainingTimeMessage.replace("%hours%", String.valueOf(remainingCooldownHours)));
 
                 event.setCancelled(true);

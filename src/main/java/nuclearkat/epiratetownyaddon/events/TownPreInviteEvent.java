@@ -30,7 +30,7 @@ public class TownPreInviteEvent implements Listener {
         }
 
         if (CooldownTimerTask.hasCooldown(invitedPlayer.getName(), "TownHop Cooldown")) {
-            long remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(invitedPlayer);
+            String remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(invitedPlayer);
             String inviteMessage = ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.inviteCooldownMessage
                     .replace("%player%", invitedPlayer.getName())
                     .replace("%hours%", String.valueOf(remainingCooldownHours)));

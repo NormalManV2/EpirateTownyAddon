@@ -24,7 +24,7 @@ public final class EpirateTownyAddon extends JavaPlugin implements Listener {
     public String inviteCooldownMessage;
 
     // Default cooldown duration.
-    private static final int DEFAULT_COOLDOWN_DURATION = (int) TimeUnit.HOURS.toHours(24);
+    private static final int DEFAULT_COOLDOWN_DURATION = (int) TimeUnit.HOURS.toSeconds(24);
     @Override
     public void onEnable() {
         registerEvents();
@@ -43,11 +43,20 @@ public final class EpirateTownyAddon extends JavaPlugin implements Listener {
     public void setCooldown(Player player) {
         CooldownTimerTask.addCooldownTimer(player.getName(), "TownHop Cooldown", cooldownDurationHours);
     }
-    public long getRemainingCooldownHours(Player player) {
-        if (CooldownTimerTask.hasCooldown(player.getName(), "TownHop Cooldown")){
-            return CooldownTimerTask.getCooldownRemaining(player.getName(), "TownHop Cooldown");
+    private String formatRemainingTime(long seconds) {
+        long hours = TimeUnit.SECONDS.toHours(seconds);
+        long minutes = TimeUnit.SECONDS.toMinutes(seconds) % 60;
+        long remainingSeconds = seconds % 60;
+
+        return String.format("%02d:%02d:%02d", hours, minutes, remainingSeconds);
+    }
+
+    public String getRemainingCooldownHours(Player player) {
+        if (CooldownTimerTask.hasCooldown(player.getName(), "TownHop Cooldown")) {
+            long remainingCooldownSeconds = CooldownTimerTask.getCooldownRemaining(player.getName(), "TownHop Cooldown");
+            return formatRemainingTime(remainingCooldownSeconds);
         }
-        return 0;
+        return "00:00:00";
     }
     private void loadConfig() {
         FileConfiguration config = getConfig();
