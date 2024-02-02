@@ -17,7 +17,7 @@ public class TownLeaveEvent implements Listener {
 
     @EventHandler
     public void onTownLeave(com.palmergames.bukkit.towny.event.town.TownLeaveEvent event) {
-        Player player = (Player) event.getResident();
+        Player player = event.getResident().getPlayer();
         handleTownAction(player, event);
     }
 
