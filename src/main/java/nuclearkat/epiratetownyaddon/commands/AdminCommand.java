@@ -23,42 +23,51 @@ public class AdminCommand implements CommandExecutor {
         if (player == null) return false;
         if (!player.hasPermission("towny.cooldowns.admin")) return false;
 
-        String subcommand = args[0];
-
-        switch (subcommand){
-
-            case "remove":
-                Player targetPlayer = Bukkit.getPlayer(args[1]);
-
-                if (targetPlayer == null) break;
-                if (!CooldownTimerTask.hasCooldown(targetPlayer.getName(), "TownHop Cooldown")) break;
-
-                if (CooldownTimerTask.hasCooldown(targetPlayer.getName(), "TownHop Cooldown")){
-                    CooldownTimerTask.getCooldowns().remove(targetPlayer.getName(), "TownHop Cooldown");
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&c " + targetPlayer.getName() + "&r&f have had their cooldown &l&c removed&r!"));
+        if (args.length >=2) {
+            Player targetPlayer = Bukkit.getPlayer(args[1]);
+            String subcommand = args[0];
+            switch (subcommand) {
+                case "remove":
+                    if (targetPlayer != null) {
+                        removeCooldown(player, targetPlayer);
+                    }
                     break;
-                }
-                break;
-            case "start":
-                targetPlayer = Bukkit.getPlayer(args[1]);
 
-                if (targetPlayer == null) break;
-                if (CooldownTimerTask.hasCooldown(targetPlayer.getName(), "TownHop Cooldown")){
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&c " + targetPlayer.getName() + "&r is already on&l&c cooldown!"));
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.getRemainingCooldownHours(targetPlayer)));
+                case "start":
+                    if (args.length < 3) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f Usage : &l /cda &a start &f {Player Name} (duration)"));
+                        break;
+                    }
+                    if (targetPlayer != null) {
+                        int duration = Integer.parseInt(args[2]);
+                        startCooldown(player, targetPlayer, duration);
+                    }
                     break;
-                }
-                if (!CooldownTimerTask.hasCooldown(targetPlayer.getName(), "TownHop Cooldown")){
-                    int cooldownTime = Integer.parseInt(args[2]);
-                    CooldownTimerTask.addCooldownTimer(targetPlayer.getName(), "TownHop Cooldown", cooldownTime);
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f Started cooldown on &l&c" + targetPlayer.getName() + "&r for &c&l" + cooldownTime + "&r seconds!"));
+                default:
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f Usage : &l /cda &c remove &f | &a start &f {Player Name} (duration, in the case of starting a cooldown)"));
                     break;
-                }
-                break;
-            default:
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f Usage : &l /cooldown &c remove &f | &a start &f {Player Name} (duration, in the case of starting a cooldown)"));
-                break;
+            }
         }
         return true;
     }
+    public void removeCooldown(Player player, Player targetPlayer){
+        if (CooldownTimerTask.hasCooldown(targetPlayer.getName(), "TownHop Cooldown")) {
+            CooldownTimerTask.getCooldowns().remove(targetPlayer.getName(), "TownHop Cooldown");
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&c " + targetPlayer.getName() + "&r&f has had their cooldown &l&c removed&r!"));
+        } else player.sendMessage(ChatColor.translateAlternateColorCodes('&', "Target &l&c" + targetPlayer.getName() + "&r does not currently have a cooldown!"));
+
+    }
+    public void startCooldown(Player player, Player targetPlayer, int duration){
+
+        Object cooldowns = CooldownTimerTask.getCooldowns().remove(targetPlayer.getName());
+
+        if (cooldowns == null){
+            CooldownTimerTask.addCooldownTimer(targetPlayer.getName(), "TownHop Cooldown", duration);
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f Started cooldown on &l&c" + targetPlayer.getName() + "&r for &c&l" + duration + "&r seconds!"));
+        } else {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&c " + targetPlayer.getName() + "&r is already on&l&c cooldown!"));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.getRemainingCooldownHours(targetPlayer)));
+        }
+    }
+
 }
