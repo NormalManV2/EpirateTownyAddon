@@ -51,11 +51,14 @@ public class AdminCommand implements CommandExecutor {
         return true;
     }
     public void removeCooldown(Player player, Player targetPlayer){
-        if (CooldownTimerTask.hasCooldown(targetPlayer.getName(), "TownHop Cooldown")) {
+        Object cooldowns = CooldownTimerTask.getCooldowns().remove(targetPlayer.getName());
+
+        if (cooldowns == null){
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "Target &l&c" + targetPlayer.getName() + "&r does not currently have a cooldown!"));
+        } else {
             CooldownTimerTask.getCooldowns().remove(targetPlayer.getName(), "TownHop Cooldown");
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&c " + targetPlayer.getName() + "&r&f has had their cooldown &l&c removed&r!"));
-        } else player.sendMessage(ChatColor.translateAlternateColorCodes('&', "Target &l&c" + targetPlayer.getName() + "&r does not currently have a cooldown!"));
-
+        }
     }
     public void startCooldown(Player player, Player targetPlayer, int duration){
 

@@ -33,8 +33,6 @@ public class TownLeaveEvent implements Listener {
 
                 event.setCancelled(true);
                 event.setCancelMessage(ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.onCooldownMessage + " \n " + remainingTimeMsg));
-        } else {
-            epirateTownyAddon.setCooldown(player);
         }
     }
 }

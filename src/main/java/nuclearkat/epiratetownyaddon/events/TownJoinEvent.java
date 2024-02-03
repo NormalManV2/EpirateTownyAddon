@@ -28,16 +28,15 @@ public class TownJoinEvent implements Listener {
             return;
         }
 
-        if (CooldownTimerTask.hasCooldown(player.getName(), "TownHop Cooldown")) {
+        if (!CooldownTimerTask.hasCooldown(player.getName(), "TownHop Cooldown")) {
 
+            CooldownTimerTask.addCooldownTimer(player.getName(), "TownHop Cooldown", epirateTownyAddon.cooldownDurationHours);
+        } else {
             String remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(player);
             String remainingTimeMsg = ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.remainingTimeMessage.replace("%hours%", String.valueOf(remainingCooldownHours)));
 
-                event.setCancelled(true);
-                event.setCancelMessage(ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.onCooldownMessage + " \n " + remainingTimeMsg));
-
-        } else {
-            epirateTownyAddon.setCooldown(player);
+            event.setCancelled(true);
+            event.setCancelMessage(ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.onCooldownMessage + " \n " + remainingTimeMsg));
         }
     }
 }
