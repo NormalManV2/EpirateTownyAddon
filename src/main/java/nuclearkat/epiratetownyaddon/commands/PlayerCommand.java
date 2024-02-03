@@ -24,7 +24,7 @@ public class PlayerCommand implements CommandExecutor {
         if (!player.hasPermission("towny.coodlowns.check")) return false;
 
         if (CooldownTimerTask.hasCooldown(player.getName(), "TownHop Cooldown")){
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.getRemainingCooldownHours(player)));
+            player.sendMessage(epirateTownyAddon.getRemainingCooldownHours(player));
         } else {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&c " + epirateTownyAddon.getRemainingCooldownHours(player)));
         }

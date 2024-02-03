@@ -21,8 +21,13 @@ public final class EpirateTownyAddon extends JavaPlugin implements Listener {
     //  Config variables.
     public int cooldownDurationHours;
     public String onCooldownMessage;
+    public String startCooldownMessage;
     public String remainingTimeMessage;
     public String inviteCooldownMessage;
+    public boolean disallowTownLeaveOption;
+    public boolean disallowTownJoinOption;
+    public boolean disallowTownInviteOption;
+    public boolean sendCooldownMessageToInviter;
 
     // Default cooldown duration.
     private static final int DEFAULT_COOLDOWN_DURATION = (int) TimeUnit.HOURS.toSeconds(24);
@@ -68,7 +73,13 @@ public final class EpirateTownyAddon extends JavaPlugin implements Listener {
         config.options().copyDefaults(true);
         saveConfig();
 
+        disallowTownLeaveOption = config.getBoolean("cooldowns.townLeaveEvent", false);
+        disallowTownJoinOption = config.getBoolean("cooldowns.townJoinEvent", true);
+        disallowTownInviteOption = config.getBoolean("cooldowns.townInviteEvent", true);
+        sendCooldownMessageToInviter = config.getBoolean("cooldowns.sendCooldownWarningToInviter", true);
+
         cooldownDurationHours = config.getInt("cooldowns.duration", DEFAULT_COOLDOWN_DURATION);
+        startCooldownMessage = ChatColor.translateAlternateColorCodes('&', config.getString("cooldowns.messages.startCooldown", "&fYou have been put on &c&lTownHop cooldown! &r (/cooldown to check your remaining time)"));
         onCooldownMessage = ChatColor.translateAlternateColorCodes('&', config.getString("cooldowns.messages.onCooldown", "&cYou are on cooldown. Cannot join or leave another town."));
         remainingTimeMessage = ChatColor.translateAlternateColorCodes('&', config.getString("cooldowns.messages.remainingTime", "&eRemaining cooldown: %hours% hours."));
         inviteCooldownMessage = ChatColor.translateAlternateColorCodes('&', config.getString("cooldowns.messages.inviteCooldown", "&fCannot invite &c&l%player%&f as they are on cooldown. Remaining cooldown: &c&l%hours% &fhours."));

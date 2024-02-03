@@ -27,13 +27,7 @@ public class AdminCommand implements CommandExecutor {
             Player targetPlayer = Bukkit.getPlayer(args[1]);
             String subcommand = args[0];
             switch (subcommand) {
-                case "remove":
-                    if (targetPlayer != null) {
-                        removeCooldown(player, targetPlayer);
-                    }
-                    break;
-
-                case "start":
+                case "set":
                     if (args.length < 3) {
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f Usage : &l /cda &a start &f {Player Name} (duration)"));
                         break;
@@ -43,28 +37,30 @@ public class AdminCommand implements CommandExecutor {
                         startCooldown(player, targetPlayer, duration);
                     }
                     break;
+                case "config":
+                    if (args[1].equalsIgnoreCase("save")) {
+                        epirateTownyAddon.saveConfig();
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&cConfig saved successfully!"));
+                        break;
+                    } else if (args[1].equalsIgnoreCase("reload")){
+                        epirateTownyAddon.reloadConfig();
+
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&cConfig reloaded successfully!"));
+                        break;
+                    } else player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f Usage : &l /cda &astart &f{Player Name} (duration) || /cda config save"));
+                    break;
                 default:
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f Usage : &l /cda &c remove &f | &a start &f {Player Name} (duration, in the case of starting a cooldown)"));
+                    if (!args[0].equalsIgnoreCase("set") || !args[0].equalsIgnoreCase("config")) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f Usage : &l /cda &astart &f{Player Name} (duration) || /cda config save"));
+                    }
                     break;
             }
         }
         return true;
     }
-    public void removeCooldown(Player player, Player targetPlayer){
-        Object cooldowns = CooldownTimerTask.getCooldowns().remove(targetPlayer.getName());
-
-        if (cooldowns == null){
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "Target &l&c" + targetPlayer.getName() + "&r does not currently have a cooldown!"));
-        } else {
-            CooldownTimerTask.getCooldowns().remove(targetPlayer.getName(), "TownHop Cooldown");
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&c " + targetPlayer.getName() + "&r&f has had their cooldown &l&c removed&r!"));
-        }
-    }
     public void startCooldown(Player player, Player targetPlayer, int duration){
 
-        Object cooldowns = CooldownTimerTask.getCooldowns().remove(targetPlayer.getName());
-
-        if (cooldowns == null){
+        if (CooldownTimerTask.getCooldowns().remove(player.getName()) == null){
             CooldownTimerTask.addCooldownTimer(targetPlayer.getName(), "TownHop Cooldown", duration);
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f Started cooldown on &l&c" + targetPlayer.getName() + "&r for &c&l" + duration + "&r seconds!"));
         } else {

@@ -28,16 +28,19 @@ public class TownPreInviteEvent implements Listener {
             Bukkit.getLogger().log(Level.WARNING, "Could not process invite as either inviter / invited player is null!");
             return;
         }
+        if (epirateTownyAddon.disallowTownInviteOption) return;
 
-        if (CooldownTimerTask.hasCooldown(invitedPlayer.getName(), "TownHop Cooldown")) {
-            String remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(invitedPlayer);
-            String inviteMessage = ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.inviteCooldownMessage
-                    .replace("%player%", invitedPlayer.getName())
-                    .replace("%hours%", String.valueOf(remainingCooldownHours)));
+        if (epirateTownyAddon.sendCooldownMessageToInviter) {
+            if (CooldownTimerTask.hasCooldown(invitedPlayer.getName(), "TownHop Cooldown")) {
+                String remainingCooldownHours = epirateTownyAddon.getRemainingCooldownHours(invitedPlayer);
+                String inviteMessage = ChatColor.translateAlternateColorCodes('&', epirateTownyAddon.inviteCooldownMessage
+                        .replace("%player%", invitedPlayer.getName())
+                        .replace("%hours%", String.valueOf(remainingCooldownHours)));
 
                 event.setCancelled(true);
                 event.setCancelMessage(ChatColor.translateAlternateColorCodes('&', inviteMessage));
 
+            }
         }
     }
 }

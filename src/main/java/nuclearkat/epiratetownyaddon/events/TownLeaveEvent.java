@@ -18,7 +18,9 @@ public class TownLeaveEvent implements Listener {
     @EventHandler
     public void onTownLeave(com.palmergames.bukkit.towny.event.town.TownLeaveEvent event) {
         Player player = event.getResident().getPlayer();
-        handleTownAction(player, event);
+        if (!epirateTownyAddon.disallowTownLeaveOption) {
+            event.setCancelled(false);
+        } else handleTownAction(player, event);
     }
 
     public void handleTownAction(Player player, CancellableTownyEvent event) {
