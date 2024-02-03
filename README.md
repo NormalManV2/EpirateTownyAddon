@@ -23,10 +23,37 @@ As you can see in the snippets below, the events that are triggered by this plug
 ## Command / Usage
 * Admin usage:
  * Permission node : "towny.cooldowns.admin"
- * /cda [start] | [remove] {Player Name} (duration in the case of starting a cooldown for the player) -> /cda start {playername} (duration) will start a townhop cooldown for the player for (duration, please keep in mind this value is in seconds) -> /cda remove {playername} will remove a cooldown from the player if they currently have a townhop cooldown.
+ * /cda [set] {Player Name} (duration (this can be 0 to reset a players cooldown)) -> /cda set {playername} (duration) will start a townhop cooldown for the player for (duration, please keep in mind this value is in seconds).
+ * /cda [config] [reload] -> use this to update your changes from the config.yml
+ * /cda [config] [save] -> use this to save the config.yml (keep in mind, when this plugin is shutdown it automatically saves the config. You may simply plugman reload this plugin after using the config reload command.)
 * Player usage:
  * Permission node : "towny.coodlowns.check"
  * /cooldown -> returns their current cooldown time if any.
+
+## Config.yml explanation:
+```
+cooldowns:
+  duration: 86400  # input is seconds ie: 24 hours = 86400 seconds
+  
+# Having this value set to true will not allow the player to leave a town when their cooldown is active
+  townLeaveEvent: false 
+
+# Having this value set to true will not allow the player to join a town when their cooldown is acitve.
+  townJoinEvent: true 
+
+# Having this value set to true will allow the inviter to send an invitation to the target player even if their cooldown is active.
+  townInviteEvent: true 
+
+# Having this value set to true will send a message to the inviter if the person they invited is on cooldown.
+  sendCooldownWarningToInviter: true
+
+messages:
+    onCooldown: "&cYou are on cooldown. Cannot join or leave another town."
+    # Make sure to note, the placeholders available in the strings are only formatted for that string message, meaning you can only use the provided %% plaholders in their unique messages.
+    remainingTime: "&eRemaining cooldown: %hours% hours."
+    inviteCooldown: "&fCannot invite &c&l%player%&f as they are on cooldown. Remaining cooldown: &c&l%hours% &fhours."
+  
+```
 
 
 https://github.com/NukeCaps/EpirateTownyAddon/assets/106290271/409935f0-64a3-45f1-aedc-802c118240fc
