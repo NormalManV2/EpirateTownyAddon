@@ -1,7 +1,6 @@
 package nuclearkat.epiratetownyaddon.events;
 
 import com.palmergames.bukkit.towny.event.TownAddResidentEvent;
-import com.palmergames.bukkit.towny.event.TownPreAddResidentEvent;
 import com.palmergames.bukkit.towny.tasks.CooldownTimerTask;
 import nuclearkat.epiratetownyaddon.EpirateTownyAddon;
 import org.bukkit.Bukkit;

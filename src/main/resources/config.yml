@@ -4,6 +4,7 @@ cooldowns:
     onCooldown: "&cYou are on cooldown. Cannot join or leave another town."
     remainingTime: "&eRemaining cooldown: %hours% hours."
     inviteCooldown: "&fCannot invite &c&l%player%&f as they are on cooldown. Remaining cooldown: &c&l%hours% &fhours."
+    startCooldown: "&fYou have been put on &c&lTownHop cooldown! &r (/cooldown to check your remaining time)"
   townLeaveEvent: false # Having this value set to true will not allow the player to leave a town when their cooldown is active
   townJoinEvent: true # Having this value set to true will not allow the player to join a town when their cooldown is acitve.
   townInviteEvent: true # Having this value set to true will allow the inviter to send an invitation to the target player even if their cooldown is active.
