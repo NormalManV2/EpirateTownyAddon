@@ -1,6 +1,7 @@
 # NukeCap's Towny Cooldowns
 
-## Introducing a towny addon (originally written for Epirate GeoPol) this simple & light weight towny addon comes with a painless cooldown system that eliminates the worry of people town hopping. It's equipped with a niche config where you can edit the cooldown time (in seconds, although the messages are formatted for **"... hr:min:sec ..."** default set at 24 hours)*,  as well as the messages sent to the players when the events are triggered. 
+## Introducing a towny addon (originally written for Epirate GeoPol) 
+### This simple & light weight towny addon comes with a painless cooldown system that eliminates the worry of people town hopping. It's equipped with a niche config where you can edit the cooldown time (in seconds, although the messages are formatted for **"... hr:min:sec ..."** default set at 24 hours)*,  as well as the messages sent to the players when the events are triggered. 
 
 As you can see in the snippets below, the events that are triggered by this plugin are as follows: 
 
@@ -18,7 +19,7 @@ As you can see in the snippets below, the events that are triggered by this plug
 ## TownLeaveEvent
 * Basic Functions:
  * If the player is on cooldown when leaving a town, they will not be allowed to do so and sent the message(s). Either the default ones or the ones you configure.
- * If the player is not currently on cooldown, they will be allowed to leave the town and then put on cooldown.
+ * If the player is not currently on cooldown, they will be allowed to leave the town.
 
 ## Command / Usage
 * Admin usage:
