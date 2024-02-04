@@ -69,3 +69,5 @@ https://github.com/NukeCaps/EpirateTownyAddon/assets/106290271/664b9c3a-fb1e-4be
 ### Suggestions&Notes : 
 ### if you'd like to make any suggestions or add notes / bug reports please join my discord : https://discord.gg/X5k8MQRRAF
 ### This is a project I've enjoyed creating and hope some of you may be able to get some use of it.
+
+(Spigot Download : https://www.spigotmc.org/resources/townhop-cooldown.114910/)
