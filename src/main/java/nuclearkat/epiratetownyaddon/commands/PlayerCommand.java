@@ -21,7 +21,7 @@ public class PlayerCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (player == null) return false;
-        if (!player.hasPermission("towny.coodlowns.check")) return false;
+        if (!player.hasPermission("towny.coodldowns.check")) return false;
 
         if (CooldownTimerTask.hasCooldown(player.getName(), "TownHop Cooldown")){
             player.sendMessage(epirateTownyAddon.getRemainingCooldownHours(player));

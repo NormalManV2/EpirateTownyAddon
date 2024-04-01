@@ -39,7 +39,6 @@ public class TownPreInviteEvent implements Listener {
 
                 event.setCancelled(true);
                 event.setCancelMessage(ChatColor.translateAlternateColorCodes('&', inviteMessage));
-
             }
         }
     }

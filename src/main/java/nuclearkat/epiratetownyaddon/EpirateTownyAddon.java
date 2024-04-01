@@ -78,7 +78,7 @@ public final class EpirateTownyAddon extends JavaPlugin {
         sendCooldownMessageToInviter = config.getBoolean("cooldowns.sendCooldownWarningToInviter", true);
 
         cooldownDurationHours = config.getInt("cooldowns.duration", DEFAULT_COOLDOWN_DURATION);
-        startCooldownMessage = ChatColor.translateAlternateColorCodes('&', config.getString("cooldowns.messages.startCooldown", "&fYou have been put on &c&lTownHop cooldown! &r (/cooldown to check your remaining time)"));
+        startCooldownMessage = ChatColor.translateAlternateColorCodes('&', config.getString("cooldowns.messages.startCooldown", "&fYou have been put on &c&lTownHop cooldown! &f(/cooldown to check your remaining time)"));
         onCooldownMessage = ChatColor.translateAlternateColorCodes('&', config.getString("cooldowns.messages.onCooldown", "&cYou are on cooldown. Cannot join or leave another town."));
         remainingTimeMessage = ChatColor.translateAlternateColorCodes('&', config.getString("cooldowns.messages.remainingTime", "&eRemaining cooldown: %hours% hours."));
         inviteCooldownMessage = ChatColor.translateAlternateColorCodes('&', config.getString("cooldowns.messages.inviteCooldown", "&fCannot invite &c&l%player%&f as they are on cooldown. Remaining cooldown: &c&l%hours% &fhours."));
